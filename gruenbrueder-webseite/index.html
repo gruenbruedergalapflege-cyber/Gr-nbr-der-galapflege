@@ -1,0 +1,477 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --dark: #16472B;
+    --ribbon: #1D5A32;
+    --mid: #5C9A34;
+    --accent-text: #4C8C2B;
+    --cream: #F4F1EA;
+    --cream-2: #FBFAF6;
+    --cream-3: #F3E9C8;
+    --light-green: #DDE7C7;
+    --ink: #16321F;
+    --muted: #55584f;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Poppins', 'Segoe UI', sans-serif;
+    background:var(--cream);
+    color:var(--ink);
+    line-height:1.5;
+    overflow-x:hidden;
+  }
+  a{color:inherit; text-decoration:none;}
+  ul{list-style:none;}
+  img,svg{display:block; max-width:100%;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 40px;}
+  section{padding:100px 0;}
+  h1,h2,h3{font-weight:800; color:var(--dark);}
+
+  /* reveal-on-scroll */
+  .reveal{opacity:1; transform:none;}
+  html.js .reveal{opacity:1; transform:none; transition:none;}
+  html.js .reveal.in{opacity:1; transform:translateY(0);}
+  @media (prefers-reduced-motion: reduce){
+    .reveal{opacity:1; transform:none; transition:none;}
+  }
+
+  /* ---------------- NAV ---------------- */
+  .nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(244,241,234,0.92); backdrop-filter:blur(6px);
+    border-bottom:1px solid rgba(22,71,43,0.1);
+  }
+  .nav-inner{
+    max-width:1180px; margin:0 auto; padding:0 40px;
+    height:84px; display:flex; align-items:center; justify-content:space-between;
+  }
+  .brand{display:flex; align-items:center; gap:10px; font-weight:800; font-size:24px; color:var(--dark); letter-spacing:1.5px;}
+  .brand svg{width:26px; height:26px;}
+  .nav-links{display:flex; align-items:center; gap:38px; font-weight:600; font-size:16px;}
+  .nav-links a{position:relative; padding:4px 0;}
+  .nav-links a::after{content:''; position:absolute; left:0; bottom:-2px; width:0; height:2px; background:var(--mid); transition:width .25s ease;}
+  .nav-links a:hover::after{width:100%;}
+  .nav-right{display:flex; align-items:center; gap:22px;}
+  .nav-phone{font-weight:700; font-size:15px; color:var(--dark); white-space:nowrap;}
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    padding:14px 30px; border-radius:30px; font-weight:700; font-size:15px;
+    cursor:pointer; border:2px solid transparent; transition:transform .2s ease, box-shadow .2s ease, background .2s ease;
+    white-space:nowrap;
+  }
+  .btn-primary{background:var(--dark); color:#fff;}
+  .btn-primary:hover{transform:translateY(-2px); box-shadow:0 10px 20px rgba(22,71,43,0.25);}
+  .btn-outline{background:transparent; color:var(--dark); border-color:var(--dark);}
+  .btn-outline:hover{background:var(--dark); color:#fff;}
+  .burger{display:none; width:30px; height:22px; flex-direction:column; justify-content:space-between; cursor:pointer; background:none; border:none;}
+  .burger span{display:block; height:3px; background:var(--dark); border-radius:2px;}
+
+  /* ---------------- HERO ---------------- */
+  .hero{padding:90px 0 70px 0;}
+  .hero .wrap{display:flex; align-items:center; gap:60px;}
+  .hero-text{flex:1 1 520px;}
+  .eyebrow{font-style:italic; font-weight:600; font-size:20px; color:var(--accent-text); margin-bottom:14px;}
+  .eyebrow .u{border-bottom:3px solid var(--accent-text); padding-bottom:1px;}
+  .hero h1{font-size:clamp(38px, 5.2vw, 64px); line-height:1.02; letter-spacing:0.5px; margin-bottom:22px;}
+  .hero p{font-size:19px; color:var(--muted); max-width:480px; margin-bottom:34px;}
+  .hero-btns{display:flex; gap:18px; flex-wrap:wrap;}
+  .hero-visual{flex:1 1 380px; display:flex; justify-content:center; align-items:center; position:relative;}
+  .hero-visual svg{width:100%; max-width:420px;}
+  .float-leaf{position:absolute; opacity:0.85;}
+  @keyframes sway{
+    0%,100%{ transform:rotate(-3deg); }
+    50%{ transform:rotate(4deg); }
+  }
+  .hero-visual .main-leaf{transform-origin:20% 90%; animation:sway 6s ease-in-out infinite;}
+  @media (prefers-reduced-motion: reduce){ .hero-visual .main-leaf{animation:none;} }
+
+  /* ---------------- SERVICES ---------------- */
+  .section-head{max-width:640px; margin-bottom:56px;}
+  .section-head .kicker{color:var(--mid); font-weight:700; letter-spacing:2px; font-size:14px; text-transform:uppercase; margin-bottom:10px;}
+  .section-head h2{font-size:clamp(28px,3.4vw,40px); margin-bottom:14px;}
+  .section-head p{color:var(--muted); font-size:17px;}
+  .services-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:28px;}
+  .service-card{
+    background:var(--cream-2); border-radius:16px; padding:34px 28px;
+    box-shadow:0 2px 10px rgba(22,71,43,0.06);
+    transition:transform .25s ease, box-shadow .25s ease;
+    border:1px solid rgba(22,71,43,0.06);
+  }
+  .service-card:hover{transform:translateY(-6px); box-shadow:0 16px 30px rgba(22,71,43,0.14);}
+  .service-icon{
+    width:60px; height:60px; border-radius:50%; background:var(--mid);
+    display:flex; align-items:center; justify-content:center; margin-bottom:20px;
+  }
+  .service-icon svg{width:30px; height:30px;}
+  .service-card h3{font-size:21px; margin-bottom:8px; color:var(--ink);}
+  .service-card p{color:var(--muted); font-size:15.5px;}
+
+  /* ---------------- TRUST ---------------- */
+  .trust-section{background:var(--light-green);}
+  .trust-inner{display:flex; gap:36px; align-items:stretch;}
+  .trust-ribbon{
+    flex:1 1 340px; background:var(--dark); border-radius:16px;
+    display:flex; align-items:center; gap:26px; padding:38px 40px;
+    box-shadow:0 12px 30px rgba(22,71,43,0.18);
+  }
+  .check-circle{
+    width:70px; height:70px; border-radius:50%; background:#fff; flex-shrink:0;
+    display:flex; align-items:center; justify-content:center; box-shadow:0 4px 10px rgba(0,0,0,0.15);
+  }
+  .check-circle svg{width:36px; height:36px;}
+  .trust-text{color:#fff; font-weight:800; font-size:26px; line-height:1.35; letter-spacing:0.5px;}
+  .why-box{
+    flex:1 1 420px; background:var(--cream-3); border-radius:16px; padding:38px 42px;
+    box-shadow:0 8px 22px rgba(22,71,43,0.08);
+  }
+  .why-title{display:flex; align-items:center; gap:12px; font-weight:800; font-size:23px; color:var(--dark); margin-bottom:20px;}
+  .why-title svg{width:26px; height:26px;}
+  .why-list{display:grid; grid-template-columns:1fr 1fr; gap:14px 24px;}
+  .why-item{display:flex; align-items:center; gap:14px; font-weight:600; font-size:16.5px; color:var(--ink);}
+  .why-check{width:28px; height:28px; border-radius:50%; background:var(--light-green); flex-shrink:0; display:flex; align-items:center; justify-content:center;}
+  .why-check svg{width:15px; height:15px;}
+
+  /* ---------------- BOOKING ---------------- */
+  .booking{background:var(--cream);}
+  .booking-inner{display:flex; gap:60px; align-items:flex-start;}
+  .booking-info{flex:1 1 360px;}
+  .booking-info h2{font-size:clamp(26px,3vw,36px); margin-bottom:16px;}
+  .booking-info p{color:var(--muted); font-size:16.5px; margin-bottom:26px;}
+  .booking-point{display:flex; gap:14px; align-items:flex-start; margin-bottom:20px;}
+  .booking-point .dot{width:38px; height:38px; border-radius:50%; background:var(--dark); flex-shrink:0; display:flex; align-items:center; justify-content:center;}
+  .booking-point .dot svg{width:18px; height:18px;}
+  .booking-point div strong{display:block; font-size:16px; color:var(--ink); margin-bottom:2px;}
+  .booking-point div span{color:var(--muted); font-size:15px;}
+
+  .booking-form{
+    flex:1 1 480px; background:var(--cream-3); border-radius:20px; padding:44px;
+    box-shadow:0 16px 40px rgba(22,71,43,0.12);
+  }
+  .form-row{margin-bottom:20px;}
+  .form-row label{display:block; font-weight:600; font-size:14px; color:var(--ink); margin-bottom:7px;}
+  .form-row input, .form-row select, .form-row textarea{
+    width:100%; padding:13px 16px; border-radius:10px; border:1.5px solid #d8caa0;
+    font-family:inherit; font-size:15px; color:var(--ink); background:var(--cream-2);
+    transition:border-color .2s ease;
+  }
+  .form-row input:focus, .form-row select:focus, .form-row textarea:focus{
+    outline:none; border-color:var(--mid);
+  }
+  .form-grid-2{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
+  .form-submit{width:100%; padding:16px; border-radius:12px; margin-top:6px;}
+  .form-note{font-size:13.5px; color:var(--muted); margin-top:14px; text-align:center;}
+  .form-success{
+    display:none; margin-top:16px; padding:14px 16px; border-radius:10px;
+    background:var(--light-green); color:var(--dark); font-weight:600; font-size:14.5px; text-align:center;
+  }
+  .form-success.show{display:block;}
+
+  /* ---------------- FOOTER ---------------- */
+  .site-footer{background:var(--dark); color:#fff; padding:70px 0 0 0;}
+  .footer-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:50px; padding-bottom:50px;}
+  .footer-brand{display:flex; align-items:center; gap:10px; font-weight:800; font-size:22px; letter-spacing:1.5px; margin-bottom:14px;}
+  .footer-brand svg{width:24px; height:24px;}
+  .site-footer p{color:#B9D2A9; font-size:15px; max-width:320px;}
+  .footer-col h4{font-size:15px; letter-spacing:1px; text-transform:uppercase; color:#A9D08E; margin-bottom:18px;}
+  .footer-col li{margin-bottom:12px; font-size:15px; color:#e8f0e0;}
+  .footer-col a:hover{text-decoration:underline;}
+  .footer-contact-row{display:flex; align-items:center; gap:10px;}
+  .footer-contact-row svg{width:16px; height:16px; flex-shrink:0;}
+  .footer-bottom{
+    border-top:1px solid rgba(255,255,255,0.14); padding:22px 0; text-align:center;
+    font-size:13.5px; color:#9dbb8e;
+  }
+
+  /* ---------------- RESPONSIVE ---------------- */
+  @media (max-width:900px){
+    section{padding:70px 0;}
+    .services-grid{grid-template-columns:1fr 1fr;}
+    .trust-inner{flex-direction:column;}
+    .booking-inner{flex-direction:column;}
+    .booking-form{width:100%;}
+    .footer-grid{grid-template-columns:1fr 1fr;}
+  }
+  @media (max-width:640px){
+    .wrap{padding:0 22px;}
+    .nav-inner{padding:0 22px;}
+    .nav-links{
+      position:absolute; top:84px; left:0; right:0; background:var(--cream);
+      flex-direction:column; align-items:flex-start; gap:0; padding:10px 22px 20px 22px;
+      border-bottom:1px solid rgba(22,71,43,0.1);
+      display:none;
+    }
+    .nav-links.open{display:flex;}
+    .nav-links a{padding:12px 0; width:100%;}
+    .nav-phone{display:none;}
+    .burger{display:flex;}
+    .hero .wrap{flex-direction:column;}
+    .hero-text{order:2;}
+    .hero-visual{order:1; margin-bottom:10px;}
+    .services-grid{grid-template-columns:1fr;}
+    .why-list{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr; gap:34px;}
+    .form-grid-2{grid-template-columns:1fr;}
+    .booking-form{padding:30px;}
+  }
+</style>
+<!-- NAV -->
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="#top">
+      <svg viewBox="0 0 100 100"><path d="M20 90 C20 50 40 20 85 12 C80 55 55 78 20 90 Z" fill="#5C9A34"/></svg>
+      GRÜNBRÜDER
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#leistungen">Leistungen</a>
+      <a href="#warum-wir">Warum wir</a>
+      <a href="#termin">Termin</a>
+    </nav>
+    <div class="nav-right">
+      <span class="nav-phone">📞 <a href="tel:+4915123317374">0151 - 23317374</a></span>
+      <a href="#termin" class="btn btn-primary">Termin sichern</a>
+      <button class="burger" id="burger" aria-label="Menü öffnen"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-text reveal">
+      <div class="eyebrow"><span class="u">Ihr zuverlässiger</span> Partner für</div>
+      <h1>GARTEN &amp;<br>GRUNDSTÜCKSPFLEGE</h1>
+      <p>Wir machen Ihren Außenbereich sauber, gepflegt &amp; einladend – zuverlässig, sorgfältig und zu fairen Preisen im Raum Koblenz &amp; Umgebung.</p>
+      <div class="hero-btns">
+        <a href="#termin" class="btn btn-primary">Jetzt Termin sichern</a>
+        <a href="#leistungen" class="btn btn-outline">Leistungen ansehen</a>
+      </div>
+    </div>
+    <div class="hero-visual reveal">
+      <svg class="main-leaf" viewBox="0 0 300 300">
+        <path d="M60 270 C60 150 120 60 255 36 C245 165 165 234 60 270 Z" fill="#5C9A34"/>
+        <path d="M66 265 C84 180 126 105 240 42" stroke="#3F7A22" stroke-width="4" fill="none"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="leistungen">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="kicker">Unsere Leistungen</div>
+      <h2>Alles für einen gepflegten Außenbereich</h2>
+      <p>Von der Rasenpflege bis zur Hochdruckreinigung – wir übernehmen die Arbeit, damit Sie Ihren Garten einfach genießen können.</p>
+    </div>
+    <div class="services-grid">
+
+      <div class="service-card reveal">
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M6 20 C5 15 7 10 6 5" stroke="#fff" stroke-width="2" stroke-linecap="round"/><path d="M12 20 C11 14 13 8 12 3" stroke="#fff" stroke-width="2" stroke-linecap="round"/><path d="M18 20 C17 15 19 10 18 6" stroke="#fff" stroke-width="2" stroke-linecap="round"/><path d="M3.5 20 L20.5 20" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></div>
+        <h3>Rasenmähen</h3>
+        <p>Für einen gepflegten Rasen – regelmäßig oder nach Bedarf.</p>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none"><g transform="rotate(-18 12 12)"><circle cx="6" cy="18" r="2.3" stroke="#fff" stroke-width="2"/><circle cx="6" cy="6" r="2.3" stroke="#fff" stroke-width="2"/><path d="M8 16.3 L20 5" stroke="#fff" stroke-width="2" stroke-linecap="round"/><path d="M8 7.7 L20 19" stroke="#fff" stroke-width="2" stroke-linecap="round"/></g></svg></div>
+        <h3>Hecken- &amp; Strauchschnitt</h3>
+        <p>Sauber und fachgerecht in Form gebracht.</p>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 21 L12 12" stroke="#fff" stroke-width="2" stroke-linecap="round"/><path d="M12 13 C9 13 7 10.5 7 7.5 C10 7.5 12 9.5 12 12" stroke="#fff" stroke-width="2" fill="none"/><path d="M12 13 C15 13 17 10.5 17 7.5 C14 7.5 12 9.5 12 12" stroke="#fff" stroke-width="2" fill="none"/><path d="M12 21 C10.5 21 9.5 21.8 8.5 22.6" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/><path d="M12 21 C13.5 21 14.5 21.8 15.5 22.6" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+        <h3>Unkrautentfernung</h3>
+        <p>Von Beeten, Wegen &amp; Pflasterfugen.</p>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none"><g transform="rotate(-18 12 12)"><path d="M19 4 L11.5 11.5" stroke="#fff" stroke-width="2" stroke-linecap="round"/><path d="M9.5 12.5 L13.5 8.5" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><path d="M10.5 11.5 L4 19 M12 11.5 L6.5 20.5 M13.2 11 L9 21.5 M8.7 13 L5.5 17.5" stroke="#fff" stroke-width="1.4" stroke-linecap="round"/></g></svg></div>
+        <h3>Pflaster- &amp; Wegebaureinigung</h3>
+        <p>Für saubere Einfahrten &amp; Wege.</p>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none"><rect x="7" y="9" width="10" height="11" rx="1.5" stroke="#fff" stroke-width="2"/><path d="M9 9 L9 6 L15 6 L15 9 M5 9 L19 9" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></div>
+        <h3>Laub- &amp; Grünschnittentsorgung</h3>
+        <p>Wir entsorgen alles zuverlässig für Sie.</p>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none"><g transform="rotate(-18 12 12)"><path d="M4 20 L9.5 14.5" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/><path d="M9 15 L13 11" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><path d="M14 10 L19.5 5.5 M14.5 12.5 L20.5 10 M12.5 8 L17.5 4" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/><circle cx="20.5" cy="13.5" r="1.1" fill="#fff"/><circle cx="21.5" cy="8" r="1.1" fill="#fff"/></g></svg></div>
+        <h3>Hochdruckreinigung</h3>
+        <p>Für Terrassen, Fassaden &amp; Wege.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- TRUST -->
+<section class="trust-section" id="warum-wir">
+  <div class="wrap">
+    <div class="trust-inner">
+      <div class="trust-ribbon reveal">
+        <div class="check-circle"><svg viewBox="0 0 24 24"><path d="M5 12 L10 17 L19 7" stroke="#16472B" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="trust-text">ZUVERLÄSSIG<br>SAUBER<br>FAIR</div>
+      </div>
+      <div class="why-box reveal">
+        <div class="why-title"><svg viewBox="0 0 24 24"><path d="M4 20 C4 12 10 5 20 4 C19 12 14 18 4 20 Z" fill="#5C9A34"/></svg>WARUM WIR?</div>
+        <div class="why-list">
+          <div class="why-item"><div class="why-check"><svg viewBox="0 0 24 24"><path d="M4 12.5 L9.5 18 L20 6" stroke="#16472B" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Zuverlässig &amp; pünktlich</div>
+          <div class="why-item"><div class="why-check"><svg viewBox="0 0 24 24"><path d="M4 12.5 L9.5 18 L20 6" stroke="#16472B" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Sorgfältige Arbeit</div>
+          <div class="why-item"><div class="why-check"><svg viewBox="0 0 24 24"><path d="M4 12.5 L9.5 18 L20 6" stroke="#16472B" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Faire Preise</div>
+          <div class="why-item"><div class="why-check"><svg viewBox="0 0 24 24"><path d="M4 12.5 L9.5 18 L20 6" stroke="#16472B" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Freundlicher Service</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section class="booking" id="termin">
+  <div class="wrap">
+    <div class="booking-inner">
+      <div class="booking-info reveal">
+        <div class="section-head" style="margin-bottom:34px;">
+          <div class="kicker">Termin vereinbaren</div>
+          <h2>Jetzt per Anruf oder Formular einen Termin sichern</h2>
+          <p>Füllen Sie das Formular aus – wir melden uns schnellstmöglich bei Ihnen zurück.</p>
+        </div>
+        <div class="booking-point">
+          <div class="dot"><svg viewBox="0 0 24 24"><path d="M6.6 10.8 C8 13.6 10.4 16 13.2 17.4 L15.4 15.2 C15.7 14.9 16.1 14.8 16.5 15 C17.7 15.4 19 15.6 20.3 15.6 C20.9 15.6 21.3 16 21.3 16.6 L21.3 20 C21.3 20.6 20.9 21 20.3 21 C10.7 21 3 13.3 3 3.7 C3 3.1 3.4 2.7 4 2.7 L7.4 2.7 C8 2.7 8.4 3.1 8.4 3.7 C8.4 5 8.6 6.3 9 7.5 C9.1 7.9 9 8.3 8.7 8.6 Z" fill="#fff"/></svg></div>
+          <div><strong>Telefon</strong><span><a href="tel:+4915123317374">0151 - 23317374</a></span></div>
+        </div>
+        <div class="booking-point">
+          <div class="dot"><svg viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14" rx="2" stroke="#fff" stroke-width="2"/><path d="M3.5 6.5 L12 13 L20.5 6.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div><strong>E-Mail</strong><span><a href="mailto:gruenbrueder.gala.pflege@gmail.com">gruenbrueder.gala.pflege@gmail.com</a></span></div>
+        </div>
+        <div class="booking-point">
+          <div class="dot"><svg viewBox="0 0 24 24"><path d="M12 2 C7 2 4 6 4 10 C4 16 12 22 12 22 C12 22 20 16 20 10 C20 6 17 2 12 2 Z" fill="#fff"/></svg></div>
+          <div><strong>Einsatzgebiet</strong><span>Im Raum Koblenz &amp; Umgebung</span></div>
+        </div>
+      </div>
+
+      <form class="booking-form reveal" id="bookingForm">
+        <div class="form-grid-2">
+          <div class="form-row">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required placeholder="Ihr Name">
+          </div>
+          <div class="form-row">
+            <label for="phone">Telefon</label>
+            <input type="tel" id="phone" name="phone" required placeholder="Ihre Telefonnummer">
+          </div>
+        </div>
+        <div class="form-row">
+          <label for="email">E-Mail</label>
+          <input type="email" id="email" name="email" required placeholder="ihre@email.de">
+        </div>
+        <div class="form-grid-2">
+          <div class="form-row">
+            <label for="service">Gewünschte Leistung</label>
+            <select id="service" name="service">
+              <option>Rasenmähen</option>
+              <option>Hecken- &amp; Strauchschnitt</option>
+              <option>Unkrautentfernung</option>
+              <option>Pflaster- &amp; Wegebaureinigung</option>
+              <option>Laub- &amp; Grünschnittentsorgung</option>
+              <option>Hochdruckreinigung</option>
+              <option>Sonstiges / Beratung</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label for="date">Wunschtermin</label>
+            <input type="date" id="date" name="date" min="2026-09-09">
+          </div>
+        </div>
+        <div class="form-row">
+          <label for="message">Nachricht</label>
+          <textarea id="message" name="message" rows="4" placeholder="Kurze Beschreibung, was wir für Sie tun können ..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary form-submit">Terminanfrage senden</button>
+        <div class="form-note">Öffnet Ihr E-Mail-Programm mit einer vorausgefüllten Terminanfrage an Grünbrüder.</div>
+        <div class="form-success" id="formSuccess">Ihre E-Mail-App sollte sich gerade öffnen. Falls nicht, schreiben Sie uns direkt an gruenbrueder.gala.pflege@gmail.com.</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <svg viewBox="0 0 100 100"><path d="M20 90 C20 50 40 20 85 12 C80 55 55 78 20 90 Z" fill="#5C9A34"/></svg>
+          GRÜNBRÜDER
+        </div>
+        <p>Ihr zuverlässiger Partner für Garten- &amp; Grundstückspflege im Raum Koblenz &amp; Umgebung.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Leistungen</h4>
+        <ul>
+          <li><a href="#leistungen">Rasenmähen</a></li>
+          <li><a href="#leistungen">Hecken- &amp; Strauchschnitt</a></li>
+          <li><a href="#leistungen">Unkrautentfernung</a></li>
+          <li><a href="#leistungen">Hochdruckreinigung</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Kontakt</h4>
+        <ul>
+          <li class="footer-contact-row"><svg viewBox="0 0 24 24"><path d="M6.6 10.8 C8 13.6 10.4 16 13.2 17.4 L15.4 15.2 C15.7 14.9 16.1 14.8 16.5 15 C17.7 15.4 19 15.6 20.3 15.6 C20.9 15.6 21.3 16 21.3 16.6 L21.3 20 C21.3 20.6 20.9 21 20.3 21 C10.7 21 3 13.3 3 3.7 C3 3.1 3.4 2.7 4 2.7 L7.4 2.7 C8 2.7 8.4 3.1 8.4 3.7 C8.4 5 8.6 6.3 9 7.5 C9.1 7.9 9 8.3 8.7 8.6 Z" fill="#A9D08E"/></svg><a href="tel:+4915123317374">0151 - 23317374</a></li>
+          <li class="footer-contact-row"><svg viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14" rx="2" stroke="#A9D08E" stroke-width="2"/><path d="M3.5 6.5 L12 13 L20.5 6.5" stroke="#A9D08E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><a href="mailto:gruenbrueder.gala.pflege@gmail.com">gruenbrueder.gala.pflege@gmail.com</a></li>
+          <li class="footer-contact-row"><svg viewBox="0 0 24 24"><path d="M12 2 C7 2 4 6 4 10 C4 16 12 22 12 22 C12 22 20 16 20 10 C20 6 17 2 12 2 Z" fill="#A9D08E"/></svg>Im Raum Koblenz &amp; Umgebung</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 Grünbrüder GaLa-Pflege · Alle Rechte vorbehalten · Impressum & Datenschutz werden ergänzt</div>
+  </div>
+</footer>
+
+<script>
+  // enable reveal animations only when JS runs (prevents invisible content)
+  document.documentElement.classList.add('js');
+
+  // mobile nav toggle
+  const burger = document.getElementById('burger');
+  const navLinks = document.getElementById('navLinks');
+  burger.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  // scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){ entry.target.classList.add('in'); io.unobserve(entry.target); }
+    });
+  }, {threshold:0.15});
+  revealEls.forEach(el => io.observe(el));
+
+  // booking form -> mailto
+  const form = document.getElementById('bookingForm');
+  const success = document.getElementById('formSuccess');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    const name = form.name.value.trim();
+    const phone = form.phone.value.trim();
+    const email = form.email.value.trim();
+    const service = form.service.value;
+    const date = form.date.value;
+    const message = form.message.value.trim();
+
+    const subject = encodeURIComponent('Terminanfrage über die Website – ' + service);
+    const body = encodeURIComponent(
+      'Name: ' + name + '\n' +
+      'Telefon: ' + phone + '\n' +
+      'E-Mail: ' + email + '\n' +
+      'Gewünschte Leistung: ' + service + '\n' +
+      'Wunschtermin: ' + (date || 'flexibel') + '\n\n' +
+      'Nachricht:\n' + (message || '-')
+    );
+    window.location.href = 'mailto:gruenbrueder.gala.pflege@gmail.com?subject=' + subject + '&body=' + body;
+    success.classList.add('show');
+  });
+</script>
